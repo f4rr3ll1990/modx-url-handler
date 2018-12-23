@@ -1,0 +1,37 @@
+<?php
+$par = array(
+    'name' => 'katalog',
+    'max' => '999'
+    );
+$res = $modx->runSnippet('getUrlParam', $par);
+if($res){
+    $pieces = explode("/", $res);
+    
+    
+    $strJSON = $modx->resource->getTVValue('filter-collection');
+    $arrJSON = $modx->fromJSON($strJSON);
+     
+    foreach($arrJSON as $arrJSONDataSet) {
+        if($arrJSONDataSet['url'] == $pieces[0]) {
+            $out = '
+                <h3 class="city-header">'.$arrJSONDataSet['header'].'</h3>
+                <div class="city-text">'.$arrJSONDataSet['text'].'</div>
+            ';
+            return $out;
+        }
+    //   foreach($arrJSONDataSet as $key => $value) {
+    //     if($key == 'title') {
+            
+    //         if($value) {
+                
+    //         }
+            
+    //     }
+    //   }
+    }
+    
+    
+    // return $pieces[0];
+} else {
+    return '0';
+}
